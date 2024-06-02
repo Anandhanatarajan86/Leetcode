@@ -1,8 +1,8 @@
 package arrays.dp;
 
-public class Equalpartition {
-
+public class Equalpartitionwithmemo {
     int totalSum = 0;
+    Boolean[][] memo;
     public boolean canPartition(int[] nums) {
         //calculate totalSum
         for(int element : nums){
@@ -13,6 +13,7 @@ public class Equalpartition {
             return false;
         }
         int subsetTarget = totalSum / 2;
+        memo= new Boolean[nums.length+1][totalSum+1];
         return recursiveHelper(nums,0,0,subsetTarget);
     }
 
@@ -24,16 +25,21 @@ public class Equalpartition {
         if(currIndex == nums.length){
             return false;
         }
+
+        //recall the memo
+        if(memo[currIndex][currSum]!=null){
+            return memo[currIndex][currSum];
+        }
+
         //have two choices we can include current element
         //Choice 1 : include curr element
-        currSum += nums[currIndex];
+        currSum = currSum + nums[currIndex];
         boolean choice1 = recursiveHelper(nums,currIndex + 1,currSum,subTarget);
         currSum = currSum - nums[currIndex];
-
         //Choice 2 : do not include curr element
         boolean choice2 = recursiveHelper(nums,currIndex + 1, currSum,subTarget);
-
-        return (choice1||choice2);
+        memo[currIndex][currSum] = (choice1||choice2);
+        return memo[currIndex][currSum] ;
 
     }
 }
