@@ -26,8 +26,9 @@ public class Equalpartition {
         }
         //have two choices we can include current element
         //Choice 1 : include curr element
-        //currSum
-        boolean choice1 = recursiveHelper(nums,currIndex + 1,currSum + nums[currIndex],subTarget);
+        currSum += nums[currIndex];
+        boolean choice1 = recursiveHelper(nums,currIndex + 1,currSum,subTarget);
+        currSum = currSum - nums[currIndex];
 
         //Choice 2 : do not include curr element
         boolean choice2 = recursiveHelper(nums,currIndex + 1, currSum,subTarget);
