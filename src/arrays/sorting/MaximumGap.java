@@ -1,4 +1,4 @@
-package Arrays.sorting;
+package arrays.sorting;
 
 import java.util.HashSet;
 import java.util.Set;

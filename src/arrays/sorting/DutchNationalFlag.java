@@ -1,4 +1,4 @@
-package Arrays.sorting;
+package arrays.sorting;
 
 /**
  * This problem can be solved using two pointers

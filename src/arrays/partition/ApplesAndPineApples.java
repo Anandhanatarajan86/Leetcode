@@ -1,4 +1,4 @@
-package Arrays.partition;
+package arrays.partition;
 
 public class ApplesAndPineApples {
     int lowestPrefixDivision = 0;
