@@ -1,3 +1,5 @@
+package strings.counting;
+
 class Anagram {
     public boolean isAnagram(String s, String t) {
         if (s.length() != t.length()) return false;
