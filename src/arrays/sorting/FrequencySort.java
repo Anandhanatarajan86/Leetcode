@@ -1,37 +1,43 @@
 package arrays.sorting;
 
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.*;
-public class FrequencySort {
-    Map<Character,Integer> frequencySortMap = new HashMap<>();
-    StringBuilder resBuilder = new StringBuilder();
+
+class FrequencySort {
     public String frequencySort(String s) {
-        //Write your code here
-        Character[] tempArray = new Character[s.length()];
-        for(int index = 0; index < s.length();index++){
-            tempArray[index] = s.charAt(index);
+        // Create a frequency map to count the occurrences of each character
+        Map<Character, Integer> frequencyMap = new HashMap<>();
+        for (char c : s.toCharArray()) {
+            frequencyMap.put(c, frequencyMap.getOrDefault(c, 0) + 1);
         }
-        for(char temp : tempArray){
-            frequencySortMap.put(temp,frequencySortMap.getOrDefault(temp,0)+1);
 
+        // Create a list of characters
+        List<Character> characters = new ArrayList<>();
+        for (char c : s.toCharArray()) {
+            characters.add(c);
         }
-        Comparator<Character> frequencyComparator = ((a, b)->(frequencySortMap.get(b)==frequencySortMap.get(a))?
-                a-b:frequencySortMap.get(b)-frequencySortMap.get(a));
 
-        Arrays.sort(tempArray,frequencyComparator);
-       for(char temp: tempArray){
-           resBuilder.append(temp);
-       }
-       System.out.println(resBuilder.toString());
-        return  resBuilder.toString();
+        // Sort the list based on frequency
+        characters.sort((a, b) -> {
+            int frequencyCompare = frequencyMap.get(b) - frequencyMap.get(a);
+            if (frequencyCompare == 0) {
+                return a - b; // Maintain lexicographical order if frequencies are the same
+            }
+            return frequencyCompare;
+        });
 
+        // Build the result string
+        StringBuilder result = new StringBuilder(characters.size());
+        for (char c : characters) {
+            result.append(c);
+        }
+
+        return result.toString();
     }
 
-    public  static  void  main(String[] args){
-        FrequencySort frequencySort = new FrequencySort();
-        frequencySort.frequencySort("aA");
+    public static void main(String[] args) {
+        FrequencySort solution = new FrequencySort();
+        System.out.println(solution.frequencySort("tree")); // Expected: "eert" or "eetr"
+        System.out.println(solution.frequencySort("cccaaa")); // Expected: "cccaaa" or "aaaccc"
+        System.out.println(solution.frequencySort("Aabb")); // Expected: "bbAa" or "bbaA"
     }
-
 }
