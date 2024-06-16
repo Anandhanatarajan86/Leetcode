@@ -1,12 +1,13 @@
 package strings.counting;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class AllAnagramsInString {
+public class SingleThreadedAllAnagrams {
     List<Integer> anagramIndicesList = new ArrayList<>(); // Instance Variable
-    public  List<Integer> findAnagrams(String s, String p) {
-
-
+    //Unintended accumulation due to instance variable gets accumulated due to multiple calls to this method
+    public List<Integer> findAnagrams(String s, String p) {
         // Edge cases
         if (s.isEmpty() || p.isEmpty()) {
             return anagramIndicesList;
@@ -67,3 +68,5 @@ public class AllAnagramsInString {
         System.out.println(findAllAnagramsInString.findAnagrams("abab", "ab"));       // Expected output: [0, 1, 2]
     }
 }
+
+
