@@ -8,7 +8,8 @@ public class MaximumSubArray {
 
         for (int index = 0; index < nums.length; index++) {
             sum += nums[index];
-            maxSubArray = Math.max(maxSubArray, sum - historicLowPrefixSum);
+            maxSubArray = Math.max(maxSubArray, sum);//with current index as endIndex and startIndex as 0
+            maxSubArray = Math.max(maxSubArray, sum - historicLowPrefixSum);//startIndex can be any
             historicLowPrefixSum = Math.min(historicLowPrefixSum, sum);
         }
 
@@ -18,3 +19,4 @@ public class MaximumSubArray {
         return maxSubArray;
     }
 }
+
